@@ -1,0 +1,48 @@
+<div class="text-center my-4">
+    <p class="h2 mobile-header">
+        STOCK SEARCH
+    </p>
+</div>
+
+<form id="symbol-search" (ngSubmit)="onSubmit(searchForm.value)" [formGroup]="searchForm" class="mx-auto w-100 w-md-50 w-mobile-65"> 
+    <div class="input-group align-baseline rounded-pill border border-3 mx-auto" id="group-outer">
+        <input class="bg-transparent form-control border-0 ml-3 p-0" placeholder="Enter stock ticker symbol" 
+            type="text" formControlName="searchValue" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="onSubmit(searchForm.value)">
+            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="30"></mat-spinner></mat-option>
+            <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let result of filteredSearchResult" [value]="result.symbol"> 
+                    <!-- <span>{{ result.symbol }}</span> <small> | {{result.description}}</small> -->
+                    <span class="autoResult">{{ result.symbol }} | {{result.description}}</span>
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>
+        <!-- <button class="btn shadow-none" type="submit"><span class="fa fa-search text-darkblue" style="font-size: 16px;"></span></button> -->
+            
+        <!-- Submit Button -->
+        <button class="btn shadow-none mobile-margin" type="submit" style="margin-top: -2px; margin-right: -3%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkblue" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+        </button>
+        <!-- cancel button -->
+        <button class="btn shadow-none mobile-margin2" type="button" (click)="clearInput()" style="margin-right: 1%; margin-top: -2px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="darkblue" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+        </button>
+
+        <!-- <button class="btn shadow-none" type="button" (click)="clearInput()"><span class="fa fa-times text-darkblue" style="font-size: 18px;"></span></button> -->
+    </div>
+</form>
+
+<!-- empty ticker -->
+<div *ngIf="emptyInput" class="container my-5">
+    <div class="alert alert-danger alert-dismissible text-center" role="alert" id="alert">
+        Please enter a valid Ticker
+        <button type="button" class="close" (click)="dismissAlert()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+

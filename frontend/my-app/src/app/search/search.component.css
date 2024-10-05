@@ -1,0 +1,45 @@
+.border-3 {
+    border-width: 3px!important;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+#group-outer {
+    border-color: #2224ab!important;
+    max-width: 500px;
+}
+
+.text-darkblue {
+    color: #2224ab!important;
+    /* font-weight: 100; */
+}
+
+.autoResult{
+    color: rgb(74, 71, 71);
+    font-size: 16px;
+}
+
+@media (max-width: 767px) {
+    .w-mobile-65 {
+      width: 70% !important;
+    }
+  }
+  @media (max-width: 767px) {
+    .mobile-margin {
+      margin-right: -8% !important;
+    }
+  }  
+
+  @media (max-width: 767px) {
+    .mobile-margin2 {
+      margin-right: -1% !important;
+    }
+  } 
+
+  @media (max-width: 767px) {
+    .mobile-header {
+      font-size: 38px !important;
+    }
+  } 
